@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Раздатка 1. Гермес-агент: установка и первые шаги</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;color:#2d2d38;background:#f6f7fb;padding:0 0 60px}
+header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:38px 20px 32px;text-align:center}
+header .kicker{font-size:13px;letter-spacing:2px;text-transform:uppercase;opacity:.85;margin-bottom:10px}
+header h1{font-size:30px;font-weight:700;margin-bottom:8px;line-height:1.25}
+header .sub{font-size:15px;opacity:.9;max-width:640px;margin:0 auto}
+.wrap{max-width:860px;margin:0 auto;padding:0 20px}
+nav.toc{background:#fff;border-radius:12px;padding:20px 24px;margin:-22px auto 28px;max-width:860px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
+nav.toc h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#7a7a8c;margin-bottom:12px}
+nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
+nav.toc li{margin:4px 0;font-size:14px}
+nav.toc a{color:#5a4fcf;text-decoration:none}
+nav.toc a:hover{text-decoration:underline}
+section{background:#fff;border-radius:12px;padding:26px 28px;margin-bottom:20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+section h2{font-size:21px;color:#3a3a4d;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #edeef5}
+section h3{font-size:16px;color:#5a4fcf;margin:20px 0 10px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+th{background:#f2f1fb;color:#4a4a5e;text-align:left;padding:10px 12px;font-weight:600;border:1px solid #e2e2ee}
+td{padding:10px 12px;border:1px solid #e8e8f0;vertical-align:top}
+tr:nth-child(even) td{background:#fafaff}
+ol,ul{padding-left:24px;margin:10px 0}
+li{margin:6px 0}
+code{background:#f2f1fb;padding:2px 6px;border-radius:4px;font-size:13.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#4a3fb0;word-break:break-all}
+a{color:#5a4fcf}
+.box{border-left:4px solid #667eea;background:#f4f5fe;padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14.5px}
+.box.warn{border-left-color:#e07a3f;background:#fdf4ee}
+.box.ok{border-left-color:#3aa76d;background:#eef8f2}
+.box b{display:block;margin-bottom:4px}
+.steps{counter-reset:s;list-style:none;padding:0}
+.steps li{counter-increment:s;position:relative;padding-left:42px;margin:14px 0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;background:#667eea;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.check{list-style:none;padding:0}
+.check li{padding-left:30px;position:relative;margin:9px 0}
+.check li::before{content:"";position:absolute;left:0;top:3px;width:18px;height:18px;border:2px solid #c9c9dc;border-radius:4px}
+.kbd{display:inline-block;background:#fff;border:1px solid #d5d5e5;border-bottom-width:2px;border-radius:5px;padding:2px 8px;font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#4a4a5e}
+footer{text-align:center;color:#8a8a9c;font-size:13px;margin-top:30px}
+@media(max-width:640px){nav.toc ol{columns:1}header h1{font-size:24px}section{padding:20px 18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="kicker">Раздатка 1 · Занятие 3</div>
+  <h1>Гермес-агент: установка и первые шаги</h1>
+  <div class="sub">Шпаргалка на всё занятие. Держать при себе и возвращаться в любой момент.</div>
+</header>
+
+<nav class="toc">
+  <h2>Содержание</h2>
+  <ol>
+    <li><a href="#n0">Что понадобится</a></li>
+    <li><a href="#n1">Установка за 4 шага</a></li>
+    <li><a href="#n2">Модель: три способа</a></li>
+    <li><a href="#n3">Агенты в интерфейсе</a></li>
+    <li><a href="#n4">Коннекторы</a></li>
+    <li><a href="#n5">Плагины</a></li>
+    <li><a href="#n6">Apify: аккаунт и тариф</a></li>
+    <li><a href="#n7">Replicate: ключ</a></li>
+    <li><a href="#n8">Чек-лист занятия</a></li>
+    <li><a href="#n9">Если не получилось</a></li>
+  </ol>
+</nav>
+
+<div class="wrap">
+
+<section id="n0">
+<h2>0. Что понадобится</h2>
+<table>
+<tr><th>Пункт</th><th>Значение</th></tr>
+<tr><td>Система</td><td>Windows 10/11 или macOS 12 и новее</td></tr>
+<tr><td>Место на диске</td><td>5 ГБ свободных</td></tr>
+<tr><td>Время на установку</td><td>15 минут</td></tr>
+<tr><td>Стоимость</td><td>бесплатно, код открыт</td></tr>
+<tr><td>Аккаунт</td><td>для базовой работы не нужен</td></tr>
+</table>
+</section>
+
+<section id="n1">
+<h2>1. Установка за 4 шага</h2>
+<ol class="steps">
+<li>Открыть страницу установки: <code>hermes-agent.nousresearch.com/desktop</code></li>
+<li>Скачать файл под свою систему: для Windows — <code>Hermes-Setup.exe</code>, для macOS — <code>Hermes-Setup.dmg</code></li>
+<li>Запустить двойным щелчком и дождаться. При первом запуске приложение само разворачивает локальную среду агента. Это занимает несколько минут и выглядит как скачивание компонентов. Окно не закрывать.</li>
+<li>Пройти мастер настройки. Если система спросит разрешение на запуск — разрешить, без этого агент не сможет работать с файлами.</li>
+</ol>
+<div class="box warn">
+<b>Если установщик не запускается</b>
+Проверить свободное место на диске. Если блокирует антивирус — это ложное срабатывание на локальную среду агента, нужно добавить папку в исключения.
+</div>
+</section>
+
+<section id="n2">
+<h2>2. Модель: три способа подключить</h2>
+<p>Главное, что нужно понять про устройство: <b>агент — это оболочка, модель — то, что внутри отвечает</b>. Подключаются они отдельно.</p>
+<table>
+<tr><th>Способ</th><th>Что делать</th><th>Кому подходит</th></tr>
+<tr><td><b>A. Портал-провайдер</b></td><td>Одна подписка сразу даёт: модель, поиск в сети, генерацию картинок, озвучку и браузер. Ничего настраивать не нужно.</td><td>Самый быстрый путь</td></tr>
+<tr><td><b>B. MiniMax через браузер</b></td><td>Вход без ключа и без зарубежной карты.</td><td>Когда карты нет</td></tr>
+<tr><td><b>C. Свой провайдер</b></td><td>Например OpenRouter: ключ вставляется в настройках, раздел «Провайдеры».</td><td>Если провайдер уже оплачен</td></tr>
+</table>
+<p><b>Где переключать модель в процессе работы:</b> прямо рядом с полем ввода, слева от микрофона. Модель по умолчанию для всех новых чатов задаётся в настройках, раздел «Модель», строка «Основная модель».</p>
+<div class="box ok">
+<b>Проверка подключения</b>
+Задать агенту вопрос: «Ответь одним предложением, что ты умеешь». Ответ получен — модель работает.
+</div>
+</section>
+
+<section id="n3">
+<h2>3. Агенты: где это в интерфейсе</h2>
+<p>Вкладка <b>Bots</b> в левой панели, рядом со списком разговоров. Внутри — реестр агентов: у каждого своя иконка, свой отдельный чат и свои регулярные задачи.</p>
+<ol class="steps">
+<li>В реестре нажать создание нового агента.</li>
+<li>Заполнить имя и описание.</li>
+<li>Раскрыть блок дополнительных настроек. В нём задаются: модель, личность, навыки, наборы инструментов и подключённые коннекторы.</li>
+</ol>
+<div class="box">
+<b>Главное отличие от обычного чата</b>
+Инструкция пишется один раз и живёт в агенте. Все его ответы собираются вокруг этой инструкции, а не вокруг каждого нового запроса.
+</div>
+<p>Готовые тексты инструкций — <b>Раздатка 2</b>.</p>
+</section>
+
+<section id="n4">
+<h2>4. Коннекторы: как подключить внешний сервис</h2>
+<p>Коннектор даёт агенту доступ к сервису, которого у него нет. Схема всегда одна: <b>адрес сервиса плюс вход</b>.</p>
+<p><b>Где настраивается:</b> настройки, раздел «MCP-серверы». Там же есть встроенный каталог готовых подключений.</p>
+<p>Вход бывает двух видов:</p>
+<ul>
+<li>через браузер — агент показывает ссылку, вход подтверждается в браузере;</li>
+<li>по токену — ключ вставляется в поле.</li>
+</ul>
+<h3>Готовый пример — Apify</h3>
+<ul>
+<li>адрес сервиса: <code>https://mcp.apify.com/</code></li>
+<li>токен берётся в Apify: раздел «Настройки», затем «Интеграции»;</li>
+<li>второй путь, короче: поставить плагин Apify из каталога, см. раздел 5.</li>
+</ul>
+<p>Если коннектор добавлен, а новых инструментов в чате не видно — ввести в чате команду <span class="kbd">/reload-mcp</span>.</p>
+</section>
+
+<section id="n5">
+<h2>5. Плагины: где расширяется агент</h2>
+<p>Раздел <b>Capabilities</b>, вкладка <b>Plugins</b>. Это единственное место, где агент расширяется. Одна строка на плагин и два выключателя:</p>
+<table>
+<tr><th>Колонка</th><th>Что расширяет</th></tr>
+<tr><td><b>Desktop</b></td><td>приложение: панели, кнопки, темы</td></tr>
+<tr><td><b>Agent</b></td><td>самого агента: новые инструменты, новые модели</td></tr>
+</table>
+<p><b>Два способа установки:</b></p>
+<ul>
+<li><b>Из каталога</b> — проверенные записи, закреплённые на конкретной версии кода.</li>
+<li><b>Install from Git</b> — любой репозиторий по адресу.</li>
+</ul>
+<div class="box warn">
+<b>Что важно понимать про второй способ</b>
+Код из каталога проверен людьми, код по адресу — нет. Плагин для настольного приложения выполняется с правами самого приложения и не изолирован в отдельной среде. Поэтому ставится только то, что прочитано и понято.
+</div>
+</section>
+
+<section id="n6">
+<h2>6. Apify: аккаунт и тариф</h2>
+<p>Кабинет: <code>https://console.apify.com/</code></p>
+<div class="box ok">
+<b>Тариф бесплатный</b>
+5 долларов в месяц на запуск сценариев. Банковская карта для регистрации не нужна. Неиспользованный остаток сгорает в конце месяца и не переносится.
+</div>
+<p>Где смотреть остаток: в кабинете, раздел <b>Billing</b>.</p>
+</section>
+
+<section id="n7">
+<h2>7. Replicate: как получить ключ</h2>
+<p>Кабинет и ключи: <code>https://replicate.com/account/api-tokens</code></p>
+<p>Ключ создаётся в личном кабинете и начинается с символов <code>r8_</code>.</p>
+<div class="box warn">
+<b>Правило безопасности</b>
+Ключ работает как пароль. Не пересылать его в чатах и не показывать на экране при трансляции.
+</div>
+<p><b>Куда вставляется:</b> ключи хранятся в файле настроек агента, а не в переписке. Путь к папке агента:</p>
+<ul>
+<li>Windows: <code>%LOCALAPPDATA%\hermes</code></li>
+<li>macOS и Linux: <code>~/.hermes</code></li>
+</ul>
+<p>Файл с ключами называется <code>.env</code> и лежит в этой папке.</p>
+</section>
+
+<section id="n8">
+<h2>8. Чек-лист занятия</h2>
+<ul class="check">
+<li>Приложение установлено и запускается</li>
+<li>Модель подключена, агент отвечает</li>
+<li>Созданы два агента с инструкциями</li>
+<li>Запрет в инструкции работает, агент не выдумывает данные</li>
+<li>Apify подключён, есть выгрузка в таблице</li>
+<li>Плагин правки изображений установлен</li>
+<li>Ключ Replicate получен, первая правка сделана</li>
+</ul>
+</section>
+
+<section id="n9">
+<h2>9. Если не получилось</h2>
+<table>
+<tr><th>Симптом</th><th>Что делать</th></tr>
+<tr><td>Установщик не запускается</td><td>Проверить место на диске, затем антивирус и исключения</td></tr>
+<tr><td>Агент не отвечает после подключения модели</td><td>Начать новый чат, в чате должен появиться выбор модели</td></tr>
+<tr><td>В реестре агентов пусто</td><td>Вкладка Bots находится рядом со списком разговоров в левой панели</td></tr>
+<tr><td>Коннектор подключён, инструментов нет</td><td>Ввести в чате <span class="kbd">/reload-mcp</span></td></tr>
+<tr><td>Apify не пускает</td><td>Бесплатный тариф карту не требует, зарегистрироваться заново</td></tr>
+<tr><td>Ключ Replicate не создаётся</td><td>Нужна зарубежная карта: aifory pro, Wise или Revolut</td></tr>
+<tr><td>Плагин не ставится</td><td>Открыть Replicate в браузере и сделать ту же правку через официальный интерфейс</td></tr>
+</table>
+</section>
+
+<footer>Раздатка 1 к занятию 3. Все ссылки и цифры проверены 23.10.2026.</footer>
+
+</div>
+</body>
+</html>
