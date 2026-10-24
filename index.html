@@ -3,221 +3,187 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Раздатка 1. Гермес-агент: установка и первые шаги</title>
+<title>Справка по подключению Apify</title>
 <style>
+:root{--ink:#1a2330;--muted:#5b6673;--line:#dfe4ea;--bg:#f7f8fa;--card:#fff;--accent:#1a4d8f;--accent2:#0f7b6c;--warn:#b8860b;--warnbg:#fff8e6;--free:#0f7b6c;--freebg:#e6f5f2}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.65;color:#2d2d38;background:#f6f7fb;padding:0 0 60px}
-header{background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:#fff;padding:38px 20px 32px;text-align:center}
-header .kicker{font-size:13px;letter-spacing:2px;text-transform:uppercase;opacity:.85;margin-bottom:10px}
-header h1{font-size:30px;font-weight:700;margin-bottom:8px;line-height:1.25}
-header .sub{font-size:15px;opacity:.9;max-width:640px;margin:0 auto}
-.wrap{max-width:860px;margin:0 auto;padding:0 20px}
-nav.toc{background:#fff;border-radius:12px;padding:20px 24px;margin:-22px auto 28px;max-width:860px;box-shadow:0 4px 18px rgba(0,0,0,.08)}
-nav.toc h2{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;color:#7a7a8c;margin-bottom:12px}
-nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:28px}
-nav.toc li{margin:4px 0;font-size:14px}
-nav.toc a{color:#5a4fcf;text-decoration:none}
-nav.toc a:hover{text-decoration:underline}
-section{background:#fff;border-radius:12px;padding:26px 28px;margin-bottom:20px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
-section h2{font-size:21px;color:#3a3a4d;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #edeef5}
-section h3{font-size:16px;color:#5a4fcf;margin:20px 0 10px}
-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
-th{background:#f2f1fb;color:#4a4a5e;text-align:left;padding:10px 12px;font-weight:600;border:1px solid #e2e2ee}
-td{padding:10px 12px;border:1px solid #e8e8f0;vertical-align:top}
-tr:nth-child(even) td{background:#fafaff}
-ol,ul{padding-left:24px;margin:10px 0}
-li{margin:6px 0}
-code{background:#f2f1fb;padding:2px 6px;border-radius:4px;font-size:13.5px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#4a3fb0;word-break:break-all}
-a{color:#5a4fcf}
-.box{border-left:4px solid #667eea;background:#f4f5fe;padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14.5px}
-.box.warn{border-left-color:#e07a3f;background:#fdf4ee}
-.box.ok{border-left-color:#3aa76d;background:#eef8f2}
-.box b{display:block;margin-bottom:4px}
-.steps{counter-reset:s;list-style:none;padding:0}
-.steps li{counter-increment:s;position:relative;padding-left:42px;margin:14px 0}
-.steps li::before{content:counter(s);position:absolute;left:0;top:0;width:28px;height:28px;background:#667eea;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
-.check{list-style:none;padding:0}
-.check li{padding-left:30px;position:relative;margin:9px 0}
-.check li::before{content:"";position:absolute;left:0;top:3px;width:18px;height:18px;border:2px solid #c9c9dc;border-radius:4px}
-.kbd{display:inline-block;background:#fff;border:1px solid #d5d5e5;border-bottom-width:2px;border-radius:5px;padding:2px 8px;font-family:ui-monospace,Menlo,monospace;font-size:13px;color:#4a4a5e}
-footer{text-align:center;color:#8a8a9c;font-size:13px;margin-top:30px}
-@media(max-width:640px){nav.toc ol{columns:1}header h1{font-size:24px}section{padding:20px 18px}}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+header{background:#0b3d6b;background:linear-gradient(135deg,#0b3d6b,#1a4d8f);color:#fff;padding:32px 24px}
+header .wrap{max-width:1080px;margin:0 auto}
+header .badge{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);padding:4px 12px;border-radius:20px;font-size:13px;font-weight:600}
+header h1{font-size:29px;line-height:1.25;margin:14px 0 10px;font-weight:700}
+header p{font-size:16px;opacity:.92;max-width:800px}
+header .meta{font-size:14px;opacity:.8;margin-top:14px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+main{padding:32px 0 56px}
+section{margin-bottom:44px}
+h2{font-size:22px;margin-bottom:8px;font-weight:700}
+h2 + .lead{color:var(--muted);font-size:15px;margin-bottom:18px}
+h3{font-size:17px;margin:24px 0 10px;font-weight:650}
+h4{font-size:15.5px;margin:0 0 6px;color:var(--accent)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin-bottom:16px}
+.alert{border-left:4px solid var(--warn);background:var(--warnbg);border-radius:0 8px 8px 0}
+.alert strong{color:#8a6100}
+.good{border-left:4px solid var(--accent2);background:var(--freebg);border-radius:0 8px 8px 0}
+.good strong{color:#0b5f53}
+.free-badge{display:inline-block;background:var(--freebg);color:var(--free);font-size:11.5px;font-weight:700;padding:3px 9px;border-radius:4px;border:1px solid #bfe3dc;white-space:nowrap}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;font-size:14.5px}
+th{background:#eef1f5;text-align:left;padding:12px 14px;font-weight:650;font-size:13px;color:#3d4753;border-bottom:2px solid var(--line)}
+td{padding:12px 14px;border-bottom:1px solid #eceff2;vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr.pick{background:#f4faf8}
+.mname{font-weight:650}
+.mid{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--muted);word-break:break-all}
+.prompt{background:#f4f6f8;border:1px solid #e2e6eb;border-left:3px solid var(--accent);border-radius:0 7px 7px 0;padding:14px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:#2b3442;margin:12px 0;white-space:pre-wrap;line-height:1.55}
+.prompt-lbl{font-size:13px;font-weight:650;color:var(--accent);margin:16px 0 4px}
+.steps{counter-reset:st;list-style:none;margin:12px 0}
+.steps li{counter-increment:st;position:relative;padding-left:38px;margin-bottom:14px}
+.steps li:before{content:counter(st);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;background:var(--accent);color:#fff;font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.check li{list-style:none;position:relative;padding-left:28px;margin-bottom:9px}
+.check li:before{content:"□";position:absolute;left:0;top:-1px;font-size:17px;color:var(--accent2);font-weight:700}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px;margin:16px 0}
+.mini{background:var(--card);border:1px solid var(--line);border-radius:9px;padding:16px 18px}
+.mini p{font-size:14px;color:var(--muted)}
+ul,ol{margin:10px 0 10px 22px}
+li{margin-bottom:7px}
+a{color:var(--accent)}
+.tblwrap{overflow-x:auto;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.tblwrap table{border:none}
+footer{background:#1f2732;color:#9aa5b1;padding:26px 24px;font-size:13.5px}
+footer .wrap{max-width:1080px;margin:0 auto}
+footer a{color:#8fb4e8}
+@media(max-width:640px){header h1{font-size:23px}main{padding:24px 0 40px}th,td{padding:10px 11px;font-size:13.5px}}
 </style>
 </head>
 <body>
-<header>
-  <div class="kicker">Раздатка 1 · Занятие 3</div>
-  <h1>Гермес-агент: установка и первые шаги</h1>
-  <div class="sub">Шпаргалка на всё занятие. Держать при себе и возвращаться в любой момент.</div>
-</header>
+<header><div class="wrap">
+<span class="badge">Раздаточный материал №13</span>
+<h1>Справка по подключению Apify</h1>
+<p>Регистрация, токен, подключение к LobeHub, выбор сценария и первая выгрузка с маркетплейса. Всё, что нужно до занятия и во время него.</p>
+<div class="meta">Занятие 2 · 23 октября 2026 · к занятию 3 · данные проверены 24 октября 2026</div>
+</div></header>
 
-<nav class="toc">
-  <h2>Содержание</h2>
-  <ol>
-    <li><a href="#n0">Что понадобится</a></li>
-    <li><a href="#n1">Установка за 4 шага</a></li>
-    <li><a href="#n2">Модель: три способа</a></li>
-    <li><a href="#n3">Агенты в интерфейсе</a></li>
-    <li><a href="#n4">Коннекторы</a></li>
-    <li><a href="#n5">Плагины</a></li>
-    <li><a href="#n6">Apify: аккаунт и тариф</a></li>
-    <li><a href="#n7">Replicate: ключ</a></li>
-    <li><a href="#n8">Чек-лист занятия</a></li>
-    <li><a href="#n9">Если не получилось</a></li>
-  </ol>
-</nav>
+<main class="wrap">
 
-<div class="wrap">
-
-<section id="n0">
-<h2>0. Что понадобится</h2>
-<table>
-<tr><th>Пункт</th><th>Значение</th></tr>
-<tr><td>Система</td><td>Windows 10/11 или macOS 12 и новее</td></tr>
-<tr><td>Место на диске</td><td>5 ГБ свободных</td></tr>
-<tr><td>Время на установку</td><td>15 минут</td></tr>
-<tr><td>Стоимость</td><td>бесплатно, код открыт</td></tr>
-<tr><td>Аккаунт</td><td>для базовой работы не нужен</td></tr>
-</table>
+<section>
+<div class="card good">
+<strong>Главная мысль.</strong> Apify — это «руки» вашего агента для работы с маркетплейсами. Вы описали, что нужно собрать, — агент сам запускает готовый сценарий, обходит площадку и возвращает вам таблицу. На этой странице: регистрация, токен, подключение к LobeHub, выбор сценария и разбор типичных поломок.
+</div>
 </section>
 
-<section id="n1">
-<h2>1. Установка за 4 шага</h2>
+<section>
+<h2>1. Что такое Apify</h2>
+<p class="lead">Облачная площадка с готовыми инструментами сбора данных. Ключевое отличие от «просто скопировать сайт»: сценарий запускается на сервере Apify, там уже решены задачи с блокировками и форматами.</p>
+<div class="tblwrap"><table>
+<thead><tr><th>Параметр</th><th>Значение</th></tr></thead>
+<tbody>
+<tr class="pick"><td class="mname">Что это</td><td>Маркетплейс более 95 000 готовых инструментов для сбора данных</td></tr>
+<tr class="pick"><td class="mname">Готовый инструмент называется</td><td>Actor</td></tr>
+<tr class="pick"><td class="mname">Бесплатный тариф</td><td>0 $ подписки + 5 $ использования в месяц. <strong>Карта не нужна</strong> <span class="free-badge">бесплатно</span></td></tr>
+<tr><td class="mname">Стартовый тариф</td><td>19 $ в месяц + оплата по факту</td></tr>
+<tr><td class="mname">Стоимость вычислений</td><td>0,20 $ за вычислительную единицу (1 ГБ памяти на час)</td></tr>
+<tr><td class="mname">Одновременных запусков</td><td>5 на бесплатном тарифе</td></tr>
+<tr><td class="mname">Где брать</td><td><a href="https://apify.com" target="_blank">apify.com</a> · каталог — <a href="https://apify.com/store" target="_blank">apify.com/store</a></td></tr>
+<tr><td class="mname">MCP-сервер</td><td class="mid">https://mcp.apify.com</td></tr>
+</tbody></table></div>
+<div class="card alert">
+<strong>Важно про бесплатные кредиты.</strong> Неиспользованный остаток 5 $ сгорает в конце месяца — переносится на следующий он не переносится. Для учебных прогонов этого достаточно, но каждый месяц начинайте с чистого баланса.
+</div>
+</section>
+
+<section>
+<h2>2. Регистрация и токен</h2>
 <ol class="steps">
-<li>Открыть страницу установки: <code>hermes-agent.nousresearch.com/desktop</code></li>
-<li>Скачать файл под свою систему: для Windows — <code>Hermes-Setup.exe</code>, для macOS — <code>Hermes-Setup.dmg</code></li>
-<li>Запустить двойным щелчком и дождаться. При первом запуске приложение само разворачивает локальную среду агента. Это занимает несколько минут и выглядит как скачивание компонентов. Окно не закрывать.</li>
-<li>Пройти мастер настройки. Если система спросит разрешение на запуск — разрешить, без этого агент не сможет работать с файлами.</li>
+<li><strong>Откройте apify.com</strong> и нажмите «Start for free». Войти можно через Google — это самый быстрый путь.</li>
+<li><strong>Карту привязывать не нужно.</strong> Бесплатный тариф работает без карты. Если платформа всё же просит карту — это можно пропустить, выйти и войти заново через Google.</li>
+<li><strong>Получите токен:</strong> откройте <span class="mid">console.apify.com/settings/integrations</span> → раздел API & Integrations → скопируйте токен.</li>
+<li><strong>Сохраните токен</strong> в тот же файл, где лежат остальные ключи. Токен виден в настройках всегда — его можно пересоздать в любой момент, если потеряли.</li>
+<li><strong>Не пересылайте токен</strong> никому. Это доступ к вашему аккаунту и к его балансу.</li>
 </ol>
-<div class="box warn">
-<b>Если установщик не запускается</b>
-Проверить свободное место на диске. Если блокирует антивирус — это ложное срабатывание на локальную среду агента, нужно добавить папку в исключения.
-</div>
 </section>
 
-<section id="n2">
-<h2>2. Модель: три способа подключить</h2>
-<p>Главное, что нужно понять про устройство: <b>агент — это оболочка, модель — то, что внутри отвечает</b>. Подключаются они отдельно.</p>
-<table>
-<tr><th>Способ</th><th>Что делать</th><th>Кому подходит</th></tr>
-<tr><td><b>A. Портал-провайдер</b></td><td>Одна подписка сразу даёт: модель, поиск в сети, генерацию картинок, озвучку и браузер. Ничего настраивать не нужно.</td><td>Самый быстрый путь</td></tr>
-<tr><td><b>B. MiniMax через браузер</b></td><td>Вход без ключа и без зарубежной карты.</td><td>Когда карты нет</td></tr>
-<tr><td><b>C. Свой провайдер</b></td><td>Например OpenRouter: ключ вставляется в настройках, раздел «Провайдеры».</td><td>Если провайдер уже оплачен</td></tr>
-</table>
-<p><b>Где переключать модель в процессе работы:</b> прямо рядом с полем ввода, слева от микрофона. Модель по умолчанию для всех новых чатов задаётся в настройках, раздел «Модель», строка «Основная модель».</p>
-<div class="box ok">
-<b>Проверка подключения</b>
-Задать агенту вопрос: «Ответь одним предложением, что ты умеешь». Ответ получен — модель работает.
-</div>
-</section>
-
-<section id="n3">
-<h2>3. Агенты: где это в интерфейсе</h2>
-<p>Вкладка <b>Bots</b> в левой панели, рядом со списком разговоров. Внутри — реестр агентов: у каждого своя иконка, свой отдельный чат и свои регулярные задачи.</p>
+<section>
+<h2>3. Подключение к LobeHub</h2>
+<p class="lead">Пять шагов, те же самые, что и для любого другого MCP-сервиса.</p>
 <ol class="steps">
-<li>В реестре нажать создание нового агента.</li>
-<li>Заполнить имя и описание.</li>
-<li>Раскрыть блок дополнительных настроек. В нём задаются: модель, личность, навыки, наборы инструментов и подключённые коннекторы.</li>
+<li><strong>Настройки → Коннекторы</strong> в LobeHub</li>
+<li><strong>Кнопка «+»</strong> рядом со словом «Коннекторы» → добавить пользовательский навык MCP</li>
+<li><strong>Имя</strong> — латиницей, маленькими буквами, без пробелов: <span class="mid">apify</span></li>
+<li><strong>URL</strong> — вставьте <span class="mid">https://mcp.apify.com</span>. Тип авторизации — третий пункт в списке, <strong>OAuth</strong>. Поля «ID клиента» оставьте пустыми</li>
+<li><strong>«Авторизовать и подключить»</strong> → в окне Apify подтвердите доступ</li>
 </ol>
-<div class="box">
-<b>Главное отличие от обычного чата</b>
-Инструкция пишется один раз и живёт в агенте. Все его ответы собираются вокруг этой инструкции, а не вокруг каждого нового запроса.
-</div>
-<p>Готовые тексты инструкций — <b>Раздатка 2</b>.</p>
-</section>
-
-<section id="n4">
-<h2>4. Коннекторы: как подключить внешний сервис</h2>
-<p>Коннектор даёт агенту доступ к сервису, которого у него нет. Схема всегда одна: <b>адрес сервиса плюс вход</b>.</p>
-<p><b>Где настраивается:</b> настройки, раздел «MCP-серверы». Там же есть встроенный каталог готовых подключений.</p>
-<p>Вход бывает двух видов:</p>
-<ul>
-<li>через браузер — агент показывает ссылку, вход подтверждается в браузере;</li>
-<li>по токену — ключ вставляется в поле.</li>
-</ul>
-<h3>Готовый пример — Apify</h3>
-<ul>
-<li>адрес сервиса: <code>https://mcp.apify.com/</code></li>
-<li>токен берётся в Apify: раздел «Настройки», затем «Интеграции»;</li>
-<li>второй путь, короче: поставить плагин Apify из каталога, см. раздел 5.</li>
-</ul>
-<p>Если коннектор добавлен, а новых инструментов в чате не видно — ввести в чате команду <span class="kbd">/reload-mcp</span>.</p>
-</section>
-
-<section id="n5">
-<h2>5. Плагины: где расширяется агент</h2>
-<p>Раздел <b>Capabilities</b>, вкладка <b>Plugins</b>. Это единственное место, где агент расширяется. Одна строка на плагин и два выключателя:</p>
-<table>
-<tr><th>Колонка</th><th>Что расширяет</th></tr>
-<tr><td><b>Desktop</b></td><td>приложение: панели, кнопки, темы</td></tr>
-<tr><td><b>Agent</b></td><td>самого агента: новые инструменты, новые модели</td></tr>
-</table>
-<p><b>Два способа установки:</b></p>
-<ul>
-<li><b>Из каталога</b> — проверенные записи, закреплённые на конкретной версии кода.</li>
-<li><b>Install from Git</b> — любой репозиторий по адресу.</li>
-</ul>
-<div class="box warn">
-<b>Что важно понимать про второй способ</b>
-Код из каталога проверен людьми, код по адресу — нет. Плагин для настольного приложения выполняется с правами самого приложения и не изолирован в отдельной среде. Поэтому ставится только то, что прочитано и понято.
+<div class="card good">
+<strong>Проверка.</strong> Откройте любого агента — в правой колонке должны появиться инструменты Apify: поиск по каталогу, запуск сценария, чтение результата. Их появление и есть признак успешного подключения.
 </div>
 </section>
 
-<section id="n6">
-<h2>6. Apify: аккаунт и тариф</h2>
-<p>Кабинет: <code>https://console.apify.com/</code></p>
-<div class="box ok">
-<b>Тариф бесплатный</b>
-5 долларов в месяц на запуск сценариев. Банковская карта для регистрации не нужна. Неиспользованный остаток сгорает в конце месяца и не переносится.
+<section>
+<h2>4. Выбор сценария: на что смотреть</h2>
+<p class="lead">В каталоге тысячи инструментов. Выбирайте по трём признакам — и не по названию, а по результату.</p>
+<div class="tblwrap"><table>
+<thead><tr><th>На что смотреть</th><th>Что это значит</th></tr></thead>
+<tbody>
+<tr><td class="mname">Описание результата</td><td>Что именно отдаёт сценарий: карточки товаров, цены, отзывы, фото. Это главный признак</td></tr>
+<tr><td class="mname">Какая площадка</td><td>В описании должно быть названо нужное вам: Wildberries, Ozon, Яндекс.Маркет</td></tr>
+<tr><td class="mname">Поля выгрузки</td><td>Есть ли в наборе то, что вам нужно: название, состав, цена, рейтинг, число отзывов, ссылка</td></tr>
+<tr><td class="mname">Цена</td><td>Pay per event — фиксированная цена за результат. Pay per usage — считается по факту расхода</td></tr>
+<tr><td class="mname">Рейтинг и отзывы</td><td>Актуальные сценарии с большим числом запусков надёжнее</td></tr>
+</tbody></table></div>
+<div class="card alert">
+<strong>Не все сценарии доступны агенту.</strong> Инструменты с правами «полный доступ» MCP-сервер Apify намеренно не показывает: запуск такого сценария должен подтверждать человек, а не модель. Если сценарий не находится — ищите похожий.
 </div>
-<p>Где смотреть остаток: в кабинете, раздел <b>Billing</b>.</p>
 </section>
 
-<section id="n7">
-<h2>7. Replicate: как получить ключ</h2>
-<p>Кабинет и ключи: <code>https://replicate.com/account/api-tokens</code></p>
-<p>Ключ создаётся в личном кабинете и начинается с символов <code>r8_</code>.</p>
-<div class="box warn">
-<b>Правило безопасности</b>
-Ключ работает как пароль. Не пересылать его в чатах и не показывать на экране при трансляции.
-</div>
-<p><b>Куда вставляется:</b> ключи хранятся в файле настроек агента, а не в переписке. Путь к папке агента:</p>
-<ul>
-<li>Windows: <code>%LOCALAPPDATA%\hermes</code></li>
-<li>macOS и Linux: <code>~/.hermes</code></li>
-</ul>
-<p>Файл с ключами называется <code>.env</code> и лежит в этой папке.</p>
+<section>
+<h2>5. Первая выгрузка: как это выглядит</h2>
+<p class="lead">Задание формулируется одной строкой. Дальше агент подбирает сценарий, запускает и раскладывает результат.</p>
+<div class="prompt-lbl">Задание для агента — скопируйте и подставьте свои значения:</div>
+<div class="prompt">Собери карточки [категория] с [площадка] по запросу [запрос],
+с ценой от [X] до [Y]. Выпиши: бренд, название, состав, цена, рейтинг,
+число отзывов, ссылка. Положи в таблицу [название таблицы].</div>
+<ol class="steps">
+<li><strong>Сформулируйте задачу</strong> в чате агента — все семь параметров заполнены, ни одного не пропущено</li>
+<li><strong>Проверьте промежуточный результат:</strong> строки действительно про маркетплейс, поля заполнены, а не пустые</li>
+<li><strong>Проверьте таблицу:</strong> она создана агентом в Google Таблицах через коннектор, а не вами вручную</li>
+<li><strong>Сделайте вторую итерацию:</strong> добавьте к задаче собственное требование — например, «исключить товары с рейтингом ниже 4,5» — и получите обновлённую выгрузку. Именно вторая итерация показывает, что вы управляете агентом, а не просто нажимаете кнопку</li>
+</ol>
 </section>
 
-<section id="n8">
-<h2>8. Чек-лист занятия</h2>
+<section>
+<h2>6. Что делать, если не получилось</h2>
+<div class="tblwrap"><table>
+<thead><tr><th>Симптом</th><th>Причина</th><th>Что делать</th></tr></thead>
+<tbody>
+<tr><td>Apify вернул пустоту</td><td>Площадка блокирует автоматический сбор</td><td>Это не поломка настройки. Смените площадку — задача остаётся той же</td></tr>
+<tr><td>Ошибка «слишком много попыток»</td><td>Частые попытки подключения или авторизации</td><td>Подождать несколько минут. Если повторяется — сменить VPN-сервер</td></tr>
+<tr><td>Сообщение о нехватке кредитов</td><td>Исчерпаны 5 $ бесплатного тарифа</td><td>Не поломка, а граница бесплатного тарифа. Дождитесь следующего месяца или переходите на платный</td></tr>
+<tr><td>Токен не подключается</td><td>Скопирован с пробелами или от истёкшей ссылки</td><td>Создать новый токен: console.apify.com/settings/integrations</td></tr>
+<tr><td>В каталоге нет нужного сценария</td><td>Сценарий называется иначе</td><td>Искать по названию площадки и по описанию результата, а не по названию инструмента</td></tr>
+<tr><td>Инструменты Apify не появились у агента</td><td>Подключение прошло, но панель не перечиталась</td><td>Открыть агента заново — правая колонка обновится</td></tr>
+<tr><td>Выгрузка вернулась, но полей мало</td><td>Сценарий отдаёт не все поля</td><td>Написать агенту: «в выгрузке нет полей [каких] — добавь их». Многие сценарии умеют отдавать больше, чем показывают по умолчанию</td></tr>
+</tbody></table></div>
+</section>
+
+<section>
+<h2>7. Чек-лист: Apify подключён</h2>
 <ul class="check">
-<li>Приложение установлено и запускается</li>
-<li>Модель подключена, агент отвечает</li>
-<li>Созданы два агента с инструкциями</li>
-<li>Запрет в инструкции работает, агент не выдумывает данные</li>
-<li>Apify подключён, есть выгрузка в таблице</li>
-<li>Плагин правки изображений установлен</li>
-<li>Ключ Replicate получен, первая правка сделана</li>
+<li>Аккаунт создан, вход через Google</li>
+<li>Токен получен и сохранён в файл с ключами</li>
+<li>Коннектор apify добавлен, тип авторизации OAuth</li>
+<li>В панели агента появились инструменты Apify</li>
+<li>В каталоге найден сценарий под вашу площадку</li>
+<li>Тестовая выгрузка вернула непустой результат</li>
+<li>Таблица создана агентом в Google Таблицах</li>
+<li>Сделана хотя бы одна итерация с новым требованием</li>
 </ul>
 </section>
 
-<section id="n9">
-<h2>9. Если не получилось</h2>
-<table>
-<tr><th>Симптом</th><th>Что делать</th></tr>
-<tr><td>Установщик не запускается</td><td>Проверить место на диске, затем антивирус и исключения</td></tr>
-<tr><td>Агент не отвечает после подключения модели</td><td>Начать новый чат, в чате должен появиться выбор модели</td></tr>
-<tr><td>В реестре агентов пусто</td><td>Вкладка Bots находится рядом со списком разговоров в левой панели</td></tr>
-<tr><td>Коннектор подключён, инструментов нет</td><td>Ввести в чате <span class="kbd">/reload-mcp</span></td></tr>
-<tr><td>Apify не пускает</td><td>Бесплатный тариф карту не требует, зарегистрироваться заново</td></tr>
-<tr><td>Ключ Replicate не создаётся</td><td>Нужна зарубежная карта: aifory pro, Wise или Revolut</td></tr>
-<tr><td>Плагин не ставится</td><td>Открыть Replicate в браузере и сделать ту же правку через официальный интерфейс</td></tr>
-</table>
-</section>
+</main>
 
-<footer>Раздатка 1 к занятию 3. Все ссылки и цифры проверены 23.10.2026.</footer>
-
-</div>
+<footer><div class="wrap">
+Раздаточный материал №13 · Справка по подключению Apify · Занятие 2, 23 октября 2026<br>
+Источники: apify.com · apify.com/pricing · docs.apify.com/platform/integrations/mcp · console.apify.com/settings/integrations<br>
+Данные проверены 24 октября 2026. Тарифы и лимиты меняются — сверяйтесь перед оплатой.
+</div></footer>
 </body>
 </html>
